@@ -1,0 +1,3 @@
+[submodule "functional-sim"]
+	path = functional-sim
+	url = https://github.com/anycore/anycore-pisa-funcsim.git
