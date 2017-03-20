@@ -1,0 +1,41 @@
+#!/bin/bash
+mkdir -p holder
+#echo "Writing CSV from power report" > pwr_analysis.log
+#for i in {1,2,3,4,5,6}
+#do
+# echo "Dynamic${i}" >> ../pwr_analysis.log
+# cd Dynamic${i}
+# echo Dynamic${i} >> ../pwr_analysis.log
+# for j in {bzip,gzip,mcf,parser}
+# do
+#   echo $j >> ../pwr_analysis.log
+#   cd $j
+#   cd ANALYSIS
+#   cp reports/power_4.csv ../../../holder/dyn_power_${i}_${j}.csv
+#   cd ../../
+# done
+# cd ../
+#done
+#
+#for i in {1,2,3,4,5,6}
+#do
+# echo "StaticCore${i}" >> ../pwr_analysis.log
+# cd StaticCore${i}
+# echo StaticCore${i} >> ../pwr_analysis.log
+# for j in {bzip,gzip,mcf,parser}
+# do
+#   echo $j >> ../pwr_analysis.log
+#   cd $j
+#   cd ANALYSIS
+#   cp reports/power_4.csv ../../../holder/stat_power_${i}_${j}.csv
+#   cd ../../
+# done
+# cd ../
+#done
+
+for i in {1,2,3,4,5,6}
+do
+ cp StaticCore${i}/SYNTH/reports/power_ptpx_FABSCALAR_5.rpt holder/stat_power_${i}.rpt
+done
+ cp DynamicCore/SYNTH/reports/power_ptpx_FABSCALAR_5.rpt holder/dyn_power.rpt
+

@@ -1,0 +1,2 @@
+create_clock -name clock -period 1.0 find(port,"clk")
+set_propagated_clock clock

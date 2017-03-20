@@ -1,0 +1,1 @@
+../../DynamicCore/scripts/setup_local.tcl

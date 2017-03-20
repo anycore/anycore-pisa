@@ -1,0 +1,1 @@
+tail -n+92 $1 |sed 's/^\ *//g' | sed 's/)/)\n/g' | sed '/^$/d' | sed 's/)$/)kkkkk/g' | perl -p -e 's/kkkkk\n/ /'|sed 's/\s\+/,/g'|head -n-144|grep "_RAM_DEPTH\|_CAM_DEPTH\|LSUDatapath"|grep -v "BP_RAM\|BTB_RAM\|AMT_RAM\|RMT_RAM\|LDVIO_RAM\|CTI_COMMIT\|CTI_COUNTER"

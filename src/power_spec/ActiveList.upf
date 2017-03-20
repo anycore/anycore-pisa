@@ -1,0 +1,42 @@
+## CREATE POWER DOMAINS 
+#create_power_domain PD_AL 
+
+## Change the scope to AL_DATA ram instance
+set CURRENT_SCOPE [set_scope activeList/ram_configurable]
+set PD_RAM_CONFIG PD_AL_DATA
+load_upf RamConfigurableAL.upf
+set_scope ${CURRENT_SCOPE}
+
+## Change the scope to AL_CTRL ram instance
+set CURRENT_SCOPE [set_scope ctrlActiveList/ram_configurable]
+set PD_RAM_CONFIG PD_AL_CTRL
+load_upf RamConfigurableAL.upf
+set_scope ${CURRENT_SCOPE}
+
+## Change the scope to AL_NPC ram instance
+set CURRENT_SCOPE [set_scope targetAddrActiveList/ram_configurable]
+set PD_RAM_CONFIG PD_AL_TARGET
+load_upf RamConfigurableAL.upf
+set_scope ${CURRENT_SCOPE}
+
+## SUPPLY NETWORK - PD_AL 
+#create_supply_port VDD 
+#create_supply_port VSS 
+#
+#create_supply_net VDD
+#create_supply_net VSS
+
+#create_supply_net VDD -domain PD_AL 
+#create_supply_net VSS -domain PD_AL 
+
+#set_domain_supply_net PD_AL -primary_power_net VDD -primary_ground_net VSS 
+
+set_scope
+connect_supply_net VDD -ports { activeList/activeList/ram_configurable/VDD \
+                                activeList/ctrlActiveList/ram_configurable/VDD \
+                                activeList/targetAddrActiveList/ram_configurable/VDD}
+
+connect_supply_net VSS -ports { activeList/activeList/ram_configurable/VSS \ 
+                                activeList/ctrlActiveList/ram_configurable/VSS \
+                                activeList/targetAddrActiveList/ram_configurable/VSS}
+

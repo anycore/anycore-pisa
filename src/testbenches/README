@@ -1,0 +1,34 @@
+.
+memory_hier.sv                  ->      Emulates the memory hierarchy
+l2_dcache.sv                    ->      Emulates L2 Data Cache
+l2_icache.sv                    ->      Emulates L2 I-Cache
+
+simulate.sv                     ->      Testbench for core (FABSCALAR)
+simulate_power.sv               ->      Netlist simulation testbench for core
+simulate_reconfig.sv            ->      Testbench for core with dynamic configuration switch
+simulate_reconfig_power.sv      ->      Netlist simulation testbench for core with dynamic configuration switch
+
+simulate_chip.sv                ->      Testbench for chip (core + uncore) 
+simulate_chip_power.sv          ->      Netlist simulation testbench for chip
+simulate_chip_reconfig.sv       ->      Testbench for chip with dynamic configuration switch
+simulate_chip_reconfig_power.sv ->      Netlist simulation testbench for chip with dynamic configuration switch
+
+RAM_STATIC_CONFIG_tb.sv         ->      Testbenhc for the RAM_STATIC module
+RAM_PARTITIONED_tb.sv           ->      Testbench for the partitioned RAM module
+RAM_CONFIGURABLE_tb.sv          ->      Testbench for a configurable, synthesizable RAM module
+
+## The folloing files are used by the testbenches to dynamically configure an adaptive AnyCore
+TbConfig1.svh
+TbConfig2.svh
+TbConfig3.svh
+TbConfig4.svh
+TbConfig5.svh
+TbConfig6.svh
+Tb1Wide.svh
+Tb2Wide.svh
+Tb3Wide.svh
+Tb4Wide.svh
+TbSizeA.svh
+TbSizeB.svh
+TbSizeC.svh
+TbSizeD.svh

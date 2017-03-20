@@ -1,0 +1,55 @@
+## CREATE POWER DOMAINS 
+#create_power_domain PD_AL 
+
+## Change the scope to STX_PATH ram instance
+set CURRENT_SCOPE [set_scope datapath/stx_path/dataRam/ram_configurable]
+set PD_RAM_CONFIG PD_STX_DATA
+load_upf RamConfigurable.upf
+set_scope ${CURRENT_SCOPE}
+
+## Change the scope to STX_PATH cam instance
+set CURRENT_SCOPE [set_scope datapath/stx_path/addr1Cam/cam_partitioned]
+load_upf CamPartitioned.upf
+set_scope ${CURRENT_SCOPE}
+
+## Change the scope to LDX_PATH ram instance
+set CURRENT_SCOPE [set_scope datapath/ldx_path/dataRam/ram_configurable]
+set PD_RAM_CONFIG PD_LDX_DATA
+load_upf RamConfigurable.upf
+set_scope ${CURRENT_SCOPE}
+
+## Change the scope to LDX_PATH cam instance
+set CURRENT_SCOPE [set_scope datapath/ldx_path/addr1Cam/cam_partitioned]
+load_upf CamPartitioned.upf
+set_scope ${CURRENT_SCOPE}
+
+## Change the scope to LDX_PATH cam instance
+set CURRENT_SCOPE [set_scope datapath/ldx_path/addr2Cam/cam_partitioned]
+load_upf CamPartitioned.upf
+set_scope ${CURRENT_SCOPE}
+
+## SUPPLY NETWORK - PD_AL 
+#create_supply_port VDD 
+#create_supply_port VSS 
+#
+#create_supply_net VDD
+#create_supply_net VSS
+
+#create_supply_net VDD -domain PD_AL 
+#create_supply_net VSS -domain PD_AL 
+
+#set_domain_supply_net PD_AL -primary_power_net VDD -primary_ground_net VSS 
+
+set_scope
+connect_supply_net VDD -ports { lsu/datapath/stx_path/dataRam/ram_configurable/VDD \
+                                lsu/datapath/stx_path/addr1Cam/cam_partitioned/VDD \
+                                lsu/datapath/ldx_path/dataRam/ram_configurable/VDD  \
+                                lsu/datapath/ldx_path/addr1Cam/cam_partitioned/VDD \
+                                lsu/datapath/ldx_path/addr2Cam/cam_partitioned/VDD}
+
+connect_supply_net VSS -ports { lsu/datapath/stx_path/dataRam/ram_configurable/VSS \
+                                lsu/datapath/stx_path/addr1Cam/cam_partitioned/VSS \
+                                lsu/datapath/ldx_path/dataRam/ram_configurable/VSS  \
+                                lsu/datapath/ldx_path/addr1Cam/cam_partitioned/VSS \
+                                lsu/datapath/ldx_path/addr2Cam/cam_partitioned/VSS}
+

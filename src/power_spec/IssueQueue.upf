@@ -1,0 +1,126 @@
+## CREATE POWER DOMAINS 
+#create_power_domain PD_IQUEUE 
+
+## Change the scope to PAYLOAD_RAM ram instance
+#set_scope payloadRAM
+set_scope payloadRAM/ram_configurable
+load_upf RamConfigurable.upf
+set_scope ..
+set_scope ..
+
+## Change the scope to IQFREELIST_RAM ram instance
+set_scope issueQfreelist/iqfreelist/ram_configurable
+load_upf RamConfigurable.upf
+set_scope ..
+set_scope ..
+set_scope ..
+
+## Change the scope to PAYLOAD_RAM ram instance
+#set_scope payloadRAM
+set_scope src1Cam/cam_partitioned
+load_upf CamPartitioned.upf
+set_scope ..
+set_scope ..
+
+## Change the scope to PAYLOAD_RAM ram instance
+#set_scope payloadRAM
+set_scope src2Cam/cam_partitioned
+load_upf CamPartitioned.upf
+set_scope ..
+set_scope ..
+
+
+## Change the scope to Partition0
+set_scope ISSUE_PART[0].part_inst
+load_upf IssuePartition.upf
+set_scope ..
+
+## Change the scope to Partition0
+set_scope ISSUE_PART[1].part_inst
+load_upf IssuePartition.upf
+set_scope ..
+
+## Change the scope to Partition0
+set_scope ISSUE_PART[2].part_inst
+load_upf IssuePartition.upf
+set_scope ..
+
+## Change the scope to Partition0
+set_scope ISSUE_PART[3].part_inst
+load_upf IssuePartition.upf
+set_scope ..
+
+
+## Change the scope to Lane0
+set_scope ISSUE_LANE[0].lane_inst
+load_upf IssueLane.upf
+set_scope ..
+
+## Change the scope to Lane1
+set_scope ISSUE_LANE[1].lane_inst
+load_upf IssueLane.upf
+set_scope ..
+
+## Change the scope to Lane2
+set_scope ISSUE_LANE[2].lane_inst
+load_upf IssueLane.upf
+set_scope ..
+
+## Change the scope to Lane3
+set_scope ISSUE_LANE[3].lane_inst
+load_upf IssueLane.upf
+set_scope ..
+
+## Change the scope to Lane4
+set_scope ISSUE_LANE[4].lane_inst
+load_upf IssueLane.upf
+set_scope ..
+
+## Change the scope to Lane5
+set_scope ISSUE_LANE[5].lane_inst
+load_upf IssueLane.upf
+set_scope ..
+
+## SUPPLY NETWORK - PD_IQUEUE 
+#create_supply_port VDD 
+#create_supply_port VSS 
+#
+#create_supply_net VDD
+#create_supply_net VSS
+
+#create_supply_net VDD -domain PD_IQUEUE 
+#create_supply_net VSS -domain PD_IQUEUE 
+
+#set_domain_supply_net PD_IQUEUE -primary_power_net VDD -primary_ground_net VSS 
+
+set_scope
+connect_supply_net VDD -ports { issueq/payloadRAM/ram_configurable/VDD \
+                                issueq/issueQfreelist/iqfreelist/ram_configurable/VDD \
+                                issueq/src1Cam/cam_partitioned/VDD  \
+                                issueq/src2Cam/cam_partitioned/VDD  \
+                                issueq/ISSUE_PART[0].part_inst/VDD  \
+                                issueq/ISSUE_PART[1].part_inst/VDD  \
+                                issueq/ISSUE_PART[2].part_inst/VDD  \
+                                issueq/ISSUE_PART[3].part_inst/VDD  \
+                                issueq/ISSUE_LANE[0].lane_inst/VDD  \
+                                issueq/ISSUE_LANE[1].lane_inst/VDD  \
+                                issueq/ISSUE_LANE[2].lane_inst/VDD  \
+                                issueq/ISSUE_LANE[3].lane_inst/VDD  \
+                                issueq/ISSUE_LANE[4].lane_inst/VDD  \
+                                issueq/ISSUE_LANE[5].lane_inst/VDD } 
+
+connect_supply_net VSS -ports { issueq/payloadRAM/ram_configurable/VSS  \
+                                issueq/issueQfreelist/iqfreelist/ram_configurable/VSS \
+                                issueq/src1Cam/cam_partitioned/VSS  \
+                                issueq/src2Cam/cam_partitioned/VSS  \
+                                issueq/ISSUE_PART[0].part_inst/VSS  \
+                                issueq/ISSUE_PART[1].part_inst/VSS  \
+                                issueq/ISSUE_PART[2].part_inst/VSS  \
+                                issueq/ISSUE_PART[3].part_inst/VSS  \
+                                issueq/ISSUE_LANE[0].lane_inst/VSS  \
+                                issueq/ISSUE_LANE[1].lane_inst/VSS  \
+                                issueq/ISSUE_LANE[2].lane_inst/VSS  \
+                                issueq/ISSUE_LANE[3].lane_inst/VSS  \
+                                issueq/ISSUE_LANE[4].lane_inst/VSS  \
+                                issueq/ISSUE_LANE[5].lane_inst/VSS } 
+

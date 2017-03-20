@@ -1,0 +1,28 @@
+#!/usr/local/bin/perl
+print $ARGV[0];
+print $ARGV[1];
+$filename = $ARGV[0];
+print($filename."\n");
+
+$start = 100000;
+$end   = 300000;
+$startCommits = "500[0-9]";
+$endCommits   = "700[0-9]";
+
+open(DATA, "<$filename") or die "Couldn't open file $filename, $!";
+
+while(<DATA>){
+  if($_ =~ /([0-9]+)\s+ps.*Committed\s+${startCommits}\s+Instructions/){
+    print "$_";
+    $start = $1;
+  } elsif ($_ =~ /([0-9]+)\s+ps.*Committed\s+${endCommits}\s+Instructions/){
+    $end = $1;
+    print "$_";
+    last;
+  }
+}
+
+print("Using VCD in the range ${start}ps : ${end}ps\n");
+print("simvisdbutil -vcd -OUTPUT waves.vcd -OVERWRITE waves.shm/waves.trn -RANGE ${start}ps:${end}ps");
+system("simvisdbutil -vcd -OUTPUT waves.vcd -OVERWRITE waves.shm/waves.trn -RANGE ${start}ps:${end}ps");
+close(DATA);
